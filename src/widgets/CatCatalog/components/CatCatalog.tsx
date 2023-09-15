@@ -1,11 +1,15 @@
-import { useContext } from "react";
-import BreedContext from "../../../entities/cats/context/BreedContext";
+import React from "react";
+import NoCatsAvailable from "../../../pages/MainPage/components/NoCatsAvailable";
+import useGetCatsByBreed from "../../../entities/cats/hooks/useGetCatsByBreed";
 
 export default function CatCatalog() {
-  const context = useContext(BreedContext);
-  const { selectedBreed } = context;
+  const { data, error, isLoading } = useGetCatsByBreed();
 
-  console.log(selectedBreed);
+  console.log(!data || data?.length === 0);
 
-  return <h1>Hello</h1>;
+  if (!data && data?.length === 0) {
+    return <NoCatsAvailable />;
+  }
+
+  return null;
 }

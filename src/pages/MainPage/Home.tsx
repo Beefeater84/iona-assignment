@@ -45,7 +45,6 @@ function Home() {
         </Form.Group>
       </Row>
       <CatCatalog />
-      <NoCatsAvailable />
     </Container>
   );
 }
