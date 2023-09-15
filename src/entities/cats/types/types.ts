@@ -1,5 +1,5 @@
-type Breed = string;
-type BreedId = string;
+export type Breed = string;
+export type BreedId = string;
 
 export type CatBreedDB = {
   weight: {

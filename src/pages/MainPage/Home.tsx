@@ -1,17 +1,25 @@
-import React from "react";
+import React, { useContext } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
 import NoCatsAvailable from "./components/NoCatsAvailable";
 import useGetBreed from "../../entities/cats/hooks/useGetBreed";
 import { CatBreed } from "../../entities/cats/types/types";
+import CatCatalog from "../../widgets/CatCatalog/components/CatCatalog";
+import BreedContext from "../../entities/cats/context/BreedContext";
 
 function Home() {
   const { data, error, isLoading } = useGetBreed();
+  const context = useContext(BreedContext);
 
   const onSelectChangeHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    console.log(e.target.value);
+    if (!context) return;
+    const { setSelectedBreed } = context;
+    const selectedBreedId = e.target.value;
+    setSelectedBreed(selectedBreedId);
   };
+
+  // ToDo return BreedProvider here - when refactor form select
 
   return (
     <Container>
@@ -36,6 +44,7 @@ function Home() {
           </Form.Select>
         </Form.Group>
       </Row>
+      <CatCatalog />
       <NoCatsAvailable />
     </Container>
   );
