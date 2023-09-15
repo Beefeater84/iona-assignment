@@ -2,9 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./app/styles/index.scss";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import App from "./App";
+import Home from "./pages/MainPage/Home";
 import reportWebVitals from "./reportWebVitals";
-import CatByIdPage from "./app/pages/CatByIdPage/CatByIdPage";
+import CatByIdPage from "./pages/CatByIdPage/CatByIdPage";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const root = ReactDOM.createRoot(
@@ -14,7 +14,7 @@ const root = ReactDOM.createRoot(
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <Home />,
   },
   {
     path: "/:catId",
