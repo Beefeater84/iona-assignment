@@ -23,9 +23,7 @@ function Home() {
 
   return (
     <Container>
-      <Row>
-        <h1>Cat Browser</h1>
-      </Row>
+      <h1>Cat Browser</h1>
       <Row className="mt-3 mb-3">
         <Form.Group controlId="formFile" className="col-md-3 col-sm-6 col-12">
           <Form.Label>Breed</Form.Label>
