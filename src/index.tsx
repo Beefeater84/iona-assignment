@@ -7,6 +7,7 @@ import Home from "./pages/MainPage/Home";
 import reportWebVitals from "./reportWebVitals";
 import CatByIdPage from "./pages/CatByIdPage/CatByIdPage";
 import "bootstrap/dist/css/bootstrap.min.css";
+import BreedProvider from "./entities/cats/context/BreedProvider";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
@@ -35,7 +36,9 @@ const router = createBrowserRouter([
 root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
+      <BreedProvider>
+        <RouterProvider router={router} />
+      </BreedProvider>
     </QueryClientProvider>
   </React.StrictMode>,
 );

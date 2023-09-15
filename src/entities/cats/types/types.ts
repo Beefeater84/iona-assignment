@@ -1,5 +1,7 @@
-type Breed = string;
-type BreedId = string;
+export type Breed = string;
+export type BreedId = string;
+export type CatId = string;
+export type CatImgUrl = string;
 
 export type CatBreedDB = {
   weight: {
@@ -49,3 +51,10 @@ export type CatBreedsDB = CatBreedDB[];
 export type CatBreed = Pick<CatBreedDB, "id" | "name">;
 
 export type CatBreeds = CatBreed[];
+
+export type Cat = {
+  id: CatId;
+  url: CatImgUrl;
+  width: number;
+  height: number;
+};
