@@ -58,3 +58,11 @@ export type Cat = {
   width: number;
   height: number;
 };
+
+export type CatDetails = {
+  id: CatId;
+  url: CatImgUrl;
+  width: number;
+  height: number;
+  breeds: CatBreedDB[];
+};
