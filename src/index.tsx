@@ -6,7 +6,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import Home from "./pages/MainPage/Home";
 import reportWebVitals from "./reportWebVitals";
 import CatByIdPage from "./pages/CatByIdPage/CatByIdPage";
-import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
 import BreedProvider from "./entities/cats/context/BreedProvider";
 
 const root = ReactDOM.createRoot(
