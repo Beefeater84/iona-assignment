@@ -7,7 +7,5 @@ export default function useGetBreed() {
     api.get("breeds"),
   );
 
-  if (!data) return { data, error, isLoading };
-
-  return { data: getBreedName(data.data), error, isLoading };
+  return { data: getBreedName(data?.data), error, isLoading };
 }

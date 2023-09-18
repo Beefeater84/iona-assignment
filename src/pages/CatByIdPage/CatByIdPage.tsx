@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button";
 import useGetCatById from "../../entities/cats/hooks/getCatById";
 import "./catById.scss";
 import BreedContext from "../../entities/cats/context/BreedContext";
+import Loading from "../../shared/components/Loading/Loading";
 
 export default function CatByIdPage() {
   const { catId } = useParams();
@@ -14,7 +15,7 @@ export default function CatByIdPage() {
   const navigate = useNavigate();
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
   if (!data) return null;
 
