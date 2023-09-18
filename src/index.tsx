@@ -3,11 +3,9 @@ import ReactDOM from "react-dom/client";
 import "./app/styles/index.scss";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
-import Home from "./pages/MainPage/Home";
 import reportWebVitals from "./reportWebVitals";
-import CatByIdPage from "./pages/CatByIdPage/CatByIdPage";
-// import "bootstrap/dist/css/bootstrap.min.css";
 import BreedProvider from "./entities/cats/context/BreedProvider";
+import routes from "./app/router/routes";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement,
@@ -22,16 +20,7 @@ const queryClient = new QueryClient({
   },
 });
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home />,
-  },
-  {
-    path: "/:catId",
-    element: <CatByIdPage />,
-  },
-]);
+const router = createBrowserRouter(routes);
 
 root.render(
   <React.StrictMode>
