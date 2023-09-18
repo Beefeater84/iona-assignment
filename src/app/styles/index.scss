@@ -1,3 +1,5 @@
+@import "custom-bootstrap";
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -18,4 +20,9 @@ code {
 
 .block-display {
   display: block;
+}
+
+
+.page {
+    padding-block: 1rem;
 }
