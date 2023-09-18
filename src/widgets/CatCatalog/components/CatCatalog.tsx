@@ -7,6 +7,7 @@ import CatCard from "./CatCard";
 import { Cat } from "../../../entities/cats/types/types";
 import BreedContext from "../../../entities/cats/context/BreedContext";
 import filterDuplicateCats from "../mapping/filterDuplicateCats";
+import Loading from "../../../shared/components/Loading/Loading";
 
 export default function CatCatalog() {
   const context = useContext(BreedContext);
@@ -40,9 +41,7 @@ export default function CatCatalog() {
     }
   }, [data]);
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
+  if (isLoading) return <Loading />;
 
   if (!allCats || allCats?.length === 0) {
     return <NoCatsAvailable />;
