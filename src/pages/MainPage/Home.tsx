@@ -22,7 +22,7 @@ function Home() {
   // ToDo return BreedProvider here - when refactor form select
 
   return (
-    <Container>
+    <Container className="page">
       <h1>Cat Browser</h1>
       <Row className="mt-3 mb-3">
         <Form.Group controlId="formFile" className="col-md-3 col-sm-6 col-12">
