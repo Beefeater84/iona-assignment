@@ -1,24 +1,39 @@
-import { useParams } from "react-router-dom";
+import { useContext } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import useGetCatById from "../../entities/cats/hooks/getCatById";
 import "./catById.scss";
+import BreedContext from "../../entities/cats/context/BreedContext";
 
 export default function CatByIdPage() {
   const { catId } = useParams();
   const { data, error, isLoading } = useGetCatById({ url: catId });
+  const context = useContext(BreedContext);
+  const navigate = useNavigate();
 
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
   if (!data) return null;
 
-  const { name, origin, description, temperament } = data.breeds[0];
+  const { name, origin, description, temperament, id } = data.breeds[0];
+
+  const handleBackClick = () => {
+    if (!context) window.history.back();
+
+    navigate("/", {
+      state: { breedId: id },
+    });
+  };
 
   return (
     <Container>
       <div className="catByIdPage">
         <Card>
           <Card.Header>
-            <Button>Back</Button>
+            <Button onClick={handleBackClick}>Back</Button>
           </Card.Header>
           <img src={data.url} alt="" />
           <Card.Body>

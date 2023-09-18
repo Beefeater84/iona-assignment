@@ -1,8 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Form from "react-bootstrap/Form";
-import NoCatsAvailable from "./components/NoCatsAvailable";
+import { useLocation, useNavigate } from "react-router-dom";
 import useGetBreed from "../../entities/cats/hooks/useGetBreed";
 import { CatBreed } from "../../entities/cats/types/types";
 import CatCatalog from "../../widgets/CatCatalog/components/CatCatalog";
@@ -11,6 +11,8 @@ import BreedContext from "../../entities/cats/context/BreedContext";
 function Home() {
   const { data, error, isLoading } = useGetBreed();
   const context = useContext(BreedContext);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const onSelectChangeHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
     if (!context) return;
@@ -18,6 +20,24 @@ function Home() {
     const selectedBreedId = e.target.value;
     setSelectedBreed(selectedBreedId);
   };
+
+  useEffect(() => {
+    // if we came from CatByIdPage with "Back" btn, we need to set selected breed
+    if (!context) return;
+    const breedId = location.state?.breedId;
+
+    if (breedId && data) {
+      const { setSelectedBreed } = context;
+      setSelectedBreed(breedId);
+
+      // remove breedId from location state
+      const newState = { ...location.state };
+      delete newState.breedId;
+      navigate(location.pathname, { state: newState, replace: true });
+    }
+  }, [data]);
+
+  const currentBreedId = location.state?.breedId || context?.selectedBreed;
 
   // ToDo return BreedProvider here - when refactor form select
 
@@ -31,6 +51,7 @@ function Home() {
             aria-label="Choose the breed of cat"
             onChange={onSelectChangeHandler}
             disabled={isLoading || !!error}
+            value={currentBreedId}
           >
             <option>Select breed</option>
             {data &&
