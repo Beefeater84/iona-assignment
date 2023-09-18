@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 import { useQuery } from "react-query";
 import BreedContext from "../context/BreedContext";
 import api from "../api/axios";
@@ -18,15 +18,19 @@ export default function useGetCatsByBreed(page = 1) {
     () =>
       api.get<Cat[]>("/images/search", {
         params: {
-          breed_id: selectedBreed,
+          breed_ids: selectedBreed,
           limit: 10,
           page,
+          order: "DESC",
         },
       }),
     {
       enabled: !!selectedBreed,
+      keepPreviousData: true,
     },
   );
 
-  return { data: data?.data, error, isLoading };
+  return useMemo(() => {
+    return { data: data?.data, error, isLoading };
+  }, [data?.data, error, isLoading]);
 }
