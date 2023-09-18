@@ -13,7 +13,7 @@ export default function CatCatalog() {
   const [page, setPage] = useState(1);
   const { data, error, isLoading } = useGetCatsByBreed(page);
   const [allCats, setAllCats] = useState<Cat[]>([]);
-  const hasMoreData = useRef<boolean>(true);
+  const hasMoreData = useRef<boolean>(false);
 
   const handleLoadMore = () => {
     setPage((prevPage) => prevPage + 1);
@@ -35,6 +35,7 @@ export default function CatCatalog() {
     }
 
     if (data && page === 1) {
+      hasMoreData.current = data.length === 10;
       setAllCats(data);
     }
   }, [data]);
