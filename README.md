@@ -1,5 +1,3 @@
-Добрый день. 
-
 # Chosen Technologies
 
 Since working with client websites requires the developer to work not with his favorite stack, but with the stack on which the client's website is written, I used only those technologies that were listed in Required skills.
