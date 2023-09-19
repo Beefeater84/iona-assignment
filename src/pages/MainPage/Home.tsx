@@ -51,12 +51,12 @@ function Home() {
             aria-label="Choose the breed of cat"
             onChange={onSelectChangeHandler}
             disabled={isLoading || !!error}
-            value={currentBreedId}
+            value={currentBreedId || "undefined"}
           >
-            <option>Select breed</option>
+            <option value="undefined">Select breed</option>
             {data &&
               data.map((breed: CatBreed) => (
-                <option key={breed.id} value={breed.id}>
+                <option key={breed.id} value={breed.id || ""}>
                   {breed.name}
                 </option>
               ))}

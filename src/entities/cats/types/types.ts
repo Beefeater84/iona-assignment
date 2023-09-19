@@ -41,7 +41,7 @@ export type CatBreedDB = {
   rex: number;
   suppressed_tail: number;
   short_legs: number;
-  wikipedia_url: number;
+  wikipedia_url: string;
   hypoallergenic: number;
   reference_image_id: string;
 };
