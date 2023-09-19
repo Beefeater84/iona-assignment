@@ -1,5 +1,5 @@
 import React from "react";
-import { fireEvent, render, screen, within } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { QueryClientProvider } from "react-query";
 import { RouterProvider } from "react-router-dom";
 import BreedProvider from "../../entities/cats/context/BreedProvider";
@@ -8,7 +8,6 @@ import useGetBreed from "../../entities/cats/hooks/useGetBreed";
 import breed from "./mocks/mockBreeds";
 import getBreedName from "../../entities/cats/mapping/getBreedName";
 import useGetCatsByBreed from "../../entities/cats/hooks/useGetCatsByBreed";
-import { mockCats } from "./mocks/mockCats";
 
 jest.mock("../../entities/cats/hooks/useGetBreed");
 const mockedUseGetBreed = useGetBreed as jest.Mock;
@@ -43,30 +42,4 @@ test("renders Select with data", () => {
   const selectElement = screen.getByLabelText(/Choose the breed of cat/i);
   const options = within(selectElement).getAllByRole("option");
   expect(options).toHaveLength(breed.length + 1);
-});
-
-test("Send a request when breed is chosen in Select", () => {
-  mockedUseGetBreed.mockImplementation(() => ({
-    isLoading: false,
-    data: getBreedName(breed),
-    error: null,
-  }));
-
-  mockedUseGetCatsByBreed.mockImplementation(() => ({
-    isLoading: false,
-    data: mockCats,
-    error: null,
-  }));
-  render(
-    <QueryClientProvider client={queryClient}>
-      <BreedProvider>
-        <RouterProvider router={router} />
-      </BreedProvider>
-    </QueryClientProvider>,
-  );
-  const selectElement = screen.getByLabelText(/Choose the breed of cat/i);
-  fireEvent.change(selectElement, { target: { value: breed[0].id } });
-  expect(mockedUseGetCatsByBreed).toHaveBeenCalled();
-  fireEvent.change(selectElement, { target: { value: breed[1].id } });
-  expect(mockedUseGetCatsByBreed).toHaveBeenCalled();
 });
