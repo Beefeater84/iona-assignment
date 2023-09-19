@@ -12,6 +12,7 @@ import {
   mockCats,
   mockCatsPage1,
   mockCatsPage2,
+  mockCatsPage2With5Duplicates,
 } from "../../../pages/MainPage/mocks/mockCats";
 import BreedProvider from "../../../entities/cats/context/BreedProvider";
 import { CAT_IMG_ALT_TEXT } from "../consts/consts";
@@ -136,6 +137,40 @@ test("Load cats then click 'Load more' btn", () => {
 
   const allCatCards = screen.getAllByAltText(CAT_IMG_ALT_TEXT);
   expect(allCatCards).toHaveLength(mockCatsPage1.length + mockCatsPage2.length);
+});
+
+test("Show only unique cat cards", () => {
+  mockedUseGetBreed.mockImplementation(() => ({
+    isLoading: false,
+    data: getBreedName(breed),
+    error: null,
+  }));
+
+  mockedUseGetCatsByBreed.mockImplementation((page) => ({
+    isLoading: false,
+    data: page === 1 ? mockCatsPage1 : mockCatsPage2With5Duplicates,
+    error: null,
+  }));
+
+  render(
+    <QueryClientProvider client={queryClient}>
+      <BreedProvider>
+        <RouterProvider router={router} />
+      </BreedProvider>
+    </QueryClientProvider>,
+  );
+
+  const selectElement = screen.getByLabelText(/Choose the breed of cat/i);
+  fireEvent.change(selectElement, { target: { value: breed[0].id } });
+
+  const catCards = screen.getAllByAltText(CAT_IMG_ALT_TEXT);
+  expect(catCards).toHaveLength(mockCatsPage1.length);
+
+  const LoadMore = screen.getByText("Load more");
+  userEvent.click(LoadMore);
+
+  const allCatCards = screen.getAllByAltText(CAT_IMG_ALT_TEXT);
+  expect(allCatCards).toHaveLength(15);
 });
 
 test("Show 'Load more' btn if came 10 cats", () => {
