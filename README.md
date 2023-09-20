@@ -3,8 +3,12 @@
 Since working with client websites requires the developer to work not with his favorite stack, but with the stack on which the client's website is written, I used only those technologies that were listed in Required skills.
 Therefore, the build from Create React App (Typescript), React Router Dom, React Context, and React Bootstrap was used.
 
-For API requests, the combination of Axios + React Query was chosen. Since React Query can handle errors, loading, and caching requests out of the box.
+For API requests, the combination of Axios + React Query was chosen. 
+
+Since React Query can handle errors, loading, and caching requests out of the box.
+
 Scss was chosen as the design system, as it is the most versatile.
+
 In one place, I added inline css to fix the image size so it doesn't jump during loading.
 
 ```tsx
