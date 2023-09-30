@@ -9,7 +9,7 @@ Since React Query can handle errors, loading, and caching requests out of the bo
 
 Scss was chosen as the design system, as it is the most versatile.
 
-In one place, I added inline css to fix the image size so it doesn't jump during loading.
+In one place, I added inline css to fix the image size so it doesn't jump during loading, because this data comes from the server in the form of js code
 
 ```tsx
 <Card.Img
