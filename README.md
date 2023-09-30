@@ -67,7 +67,7 @@ useEffect(() => {
 
 # How to start the project
 
-Start exploring the project with Home.txt in the pages folder. 
+Start exploring the project with Home.tsx in the pages folder. 
 I hope you appreciate the simplicity and component structure.
 
 ```tsx
